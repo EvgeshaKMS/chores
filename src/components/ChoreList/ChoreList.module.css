@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../../assets/fonts/NotoSans/NotoSans-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../assets/fonts/Montserrat/static/Montserrat-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 726px;
+
+    background-color: #fff;
+
+    box-shadow: 5px 3px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+.box__header {
+    display: flex;
+
+    padding: 25px 40px;
+
+    border-bottom: 1px solid #DBE7FF;
+}
+
+.header__title {
+    display: flex;
+   
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    row-gap: 7px;
+}
+
+.header__title>h3 {
+    margin: 0;
+
+    font-family: 'Montserrat';
+    font-size: 22px;
+
+    color: #173343;
+}
+
+.header__title>span {
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    font-weight: 600;
+    
+    color: #93A0B9;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+}
+
+h3 {
+    font-family: 'Montserrat';
+    font-size: 22px;
+
+    color: #173343;
+}

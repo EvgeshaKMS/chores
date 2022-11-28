@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../../assets/fonts/NotoSans/NotoSans-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.header {
+    display: flex;
+
+    background-color: #fff;
+    filter: drop-shadow(2px 2px 20px rgba(9, 9, 11, 0.09));
+
+
+    min-width: 100%;
+    /* min-height: 80px; */
+}
+
+
+
+.account {
+    display: flex;
+    align-items: center;
+
+    border-right: 1px solid #DBE7FF;
+    padding: 15px 21px;
+}
+
+.account>img {
+    height: 50px;
+
+    margin-right: 18px;
+}
+
+.account>span {
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.account_settings {
+    display: flex;
+    align-items: center;
+
+    border-right: 1px solid #DBE7FF;
+
+    padding-left: 45px;
+    padding-right: 51px;
+}
+
+.account_settings>img {
+    margin-right: 14px;
+}
+
+.account_settings>span {
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+
+    border-left: 1px solid #DBE7FF;
+    padding-left: 48px;
+    padding-right: 45px;
+}
+
+.logout>img {
+    margin-right: 13px;
+}
+
+.logout>span {
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+@media (max-width: 791px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .account {
+        width: 50%;
+        min-height: 50px;
+
+        justify-content: space-between;
+        border: none;
+        border-bottom: 1px solid #DBE7FF;
+       
+        padding: 0;
+    }
+
+    .account>img {
+        height: 40px;
+    }
+
+    .account_settings { 
+        width: 50%;
+        min-height: 50px;
+        
+        justify-content: space-between;
+        border: none;
+        border-bottom: 1px solid #DBE7FF;
+
+        padding: 0;
+    }
+
+    .logout {
+        width: 50%; 
+        min-height: 50px;   
+
+        justify-content: space-between;
+
+        margin-left: 0;
+        padding: 0;
+        
+
+        border: none;
+    }
+}
+
+@media (max-width: 377px) {
+
+    .account {
+        width: 200px;
+    }
+
+    .account>img {
+       margin-right: 0;
+    }
+
+
+    .account_settings {
+        width: 200px;
+    }
+
+    .logout {
+        width: 200px;
+    }
+
+}

@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../../assets/fonts/NotoSans/NotoSans-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.add_button {
+    display: flex;
+    padding: 20px;
+    max-width: fit-content;
+
+    background: #fff    ;
+    border: 2px solid #ED6B6A;
+    border-radius: 2px;
+}
+
+.add_button>span {
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: #ED6B6A;
+}
+
+.add_button:hover {
+    cursor: pointer;
+}

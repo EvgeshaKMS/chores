@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../../assets/fonts/NotoSans/NotoSans-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../../assets/fonts/NotoSans/NotoSans-Light.ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+
+.footer {
+    display: flex;
+
+    /* min-height: 228px; */
+    min-width: 100%;
+
+    background-color: #112734;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100%;
+    width: 100%;
+
+    margin: 0 59px 0 41px;
+}
+
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    min-height: 130px;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    width: 198px;   
+}
+
+.information {
+    display: flex;
+    flex-wrap: wrap;
+
+    column-gap: 91px;
+}
+
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    column-gap: 40px;
+}
+
+.contacts>span {
+    color: #fff;
+    font-family: 'Noto Sans';
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: underline;
+}
+
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    column-gap: 55px;
+}
+
+.socials>a {
+    max-height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.bottom {
+    min-height: 97px;
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: space-between;
+
+    color: rgba(255, 255, 255, 0.52);
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    font-weight: 300;
+}
+
+@media (max-width: 1000px) {
+    .top {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 791px) {
+   
+    .top {
+        padding: 15px 0;
+        row-gap: 20px;
+    }
+
+    .information {
+        flex-direction: column;
+        row-gap: 20px;
+        align-items: center;
+    }
+}
+
+@media (max-width: 640px) {    
+
+    .contacts {
+        flex-direction: column;
+        row-gap: 15px;
+    }
+
+    .bottom {
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 357px) {
+    .socials  {
+        column-gap: 20px;
+    }
+
+    .bottom>span {
+        text-align: center;
+    }
+
+}
