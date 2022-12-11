@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactInputMask from "react-input-mask";
 import classes from "./Input.module.css";
 
@@ -22,11 +22,6 @@ const TimeInput = ({timeError, ...props}) => {
     return { value, selection: newState.selection };
   };
 
-  const [focused, setFocused] = useState(false);
-
-  const handleFocus = (e) => {
-    setFocused(true);
-  };
 
   return (
     <div>
@@ -35,12 +30,8 @@ const TimeInput = ({timeError, ...props}) => {
         mask={mask}
         formatChars={formatChars}
         beforeMaskedValueChange={beforeMaskedValueChange}
-        required
-        onBlur={handleFocus}
-        focused={focused.toString()}  
         {...props}
       />
-      <span className={classes.error}>{timeError}</span>
     </div>
   );
 };

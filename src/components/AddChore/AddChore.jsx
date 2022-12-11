@@ -1,76 +1,67 @@
 import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
 import AddButton from "../AddButton/AddButton";
 import Input from "../Input/Input";
 import TimeInput from "../Input/TimeInput";
 import classes from "./AddChore.module.css";
 
 const AddChore = ({ create }) => {
-  const [chore, setChore] = useState({ time: "", task: "" });
-  const [timeError, setTimeError] = useState("Укажите время");
-  const [taskError, setTaskError] = useState("Заполните поле");
-  const [formValid, setFormValid] = useState(false);
-  //добавить два useState, чтобы устанавливать required и тп
-  
-
-  useEffect(() => {
-    if (timeError || taskError) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [timeError, taskError]);
-
-  const timeHandler = (e) => {
-    setChore({ ...chore, time: e.target.value });
-    if (!e.target.value) {
-      setTimeError("Укажите время");
-    } else if (e.target.value.includes('_')) {
-      setTimeError("Укажите корректное время");
-    } else {
-      setTimeError(""); 
-    }
-  };
-
-  const taskHandler = (e) => {
-    setChore({ ...chore, task: e.target.value });
-    if (!e.target.value) {
-      setTaskError("Заполните поле");
-    } else {
-      setTaskError("");
-    }
-  };
-
-  const addNewChore = (e) => {
-    e.preventDefault();
-    const newChore = {
-      ...chore,
-      id: Date.now(),
-    };
-    create(newChore);
-    setChore({ time: "", task: "" });
-    setFormValid(false);
-    setTimeError("Укажите время");
-    setTaskError("Заполните поле");
-  };
+  const formik = useFormik({
+    initialValues: {
+      time: "",
+      task: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.time) {
+        errors.time = "Выберите время";
+      }
+      if (!values.task) {
+        errors.task = "Заполните поле";
+      }
+      return errors;
+    },
+    onSubmit: (values) => {
+      const newChore = {
+        time: formik.values.time,
+        task: formik.values.task,
+        id: Date.now(),
+      };
+      create(newChore);
+      values.time = "";
+      values.task = "";
+    },
+  });
 
   return (
-    <div className={classes.main}>
-      <TimeInput
-        value={chore.time}
-        type="text"
-        placeholder="Время"
-        timeError={timeError}
-        onChange={(e) => timeHandler(e)}
-      />
+    <form onSubmit={formik.handleSubmit} className={classes.main}>
       <Input
-        value={chore.task}
-        type="text"
-        placeholder="Чем займемся?"
-        taskError={taskError}
-        onChange={(e) => taskHandler(e)}
+        type="time"
+        name="time"
+        placeholder="Время"
+        // onChange={formik.handleChange}
+        // onBlur={formik.handleBlur}
+        // value={formik.values.time}
+        {...formik.getFieldProps('time')}
       />
-      <AddButton disabled={!formValid} onClick={addNewChore} />
-    </div>
+      {formik.touched.time && formik.errors.time ? (
+        <span className={classes.error}>{formik.errors.time}</span>
+      ) : null}
+      <Input
+        type="text"
+        name="task"
+        placeholder="Чем займемся?"
+        // onChange={formik.handleChange}
+        // onBlur={formik.handleBlur}
+        // value={formik.values.task}
+        {...formik.getFieldProps('task')}
+      />
+      {formik.touched.task && formik.errors.task ? (
+        <span className={classes.error}>{formik.errors.task}</span>
+      ) : null}
+
+      <AddButton type="submit" />
+    </form>
   );
 };
 
