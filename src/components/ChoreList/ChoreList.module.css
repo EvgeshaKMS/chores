@@ -63,6 +63,15 @@
 
 }
 
+.box__list {
+    margin: 0;
+    padding: 0;
+}
+
+.box__list>li {
+    list-style: none;
+}
+
 h3 {
     font-family: 'Montserrat';
     font-size: 22px;

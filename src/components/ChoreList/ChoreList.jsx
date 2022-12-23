@@ -1,8 +1,10 @@
 import React from "react";
+import Chore from "../../Chore";
 import ChoreItem from "../ChoreItem/ChoreItem";
 import classes from "./ChoreList.module.css";
+import { observer } from "mobx-react-lite";
 
-const ChoreList = ({ chores, remove, edit }) => {
+const ChoreList = observer(() => {
   return (
     <div className={classes.box}>
       <div className={classes.box__header}>
@@ -12,22 +14,21 @@ const ChoreList = ({ chores, remove, edit }) => {
         </div>
       </div>
 
-      {chores.length ? (
-        <div>
-          {chores.map((chore) => (
-            <ChoreItem
-              remove={remove}
-              edit={edit}
-              chore={chore}
-              key={chore.id}
-            />
-          ))}
-        </div>
-      ) : (
-        <h3 style={{ textAlign: "center" }}>Задач нет</h3>
-      )}
+      <ul className={classes.box__list}>
+        {Chore.chores.length ? (
+          <li>
+            {Chore.chores.map((chore) => (
+              <ChoreItem chore={chore} key={chore.id} />
+            ))}
+          </li>
+        ) : (
+          <li>
+            <h3 style={{ textAlign: "center" }}>Задач нет</h3>
+          </li>
+        )}
+      </ul>
     </div>
   );
-};
+});
 
 export default ChoreList;

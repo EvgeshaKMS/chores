@@ -2,32 +2,28 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import AddButton from "../AddButton/AddButton";
 import Input from "../Input/Input";
-import TimeInput from "../Input/TimeInput";
 import classes from "./AddChore.module.css";
+import Chore from "../../Chore";
+import { observer } from "mobx-react-lite";
+import * as Yup from "yup";
 
-const AddChore = ({ create }) => {
+const AddChore = observer(() => {
   const formik = useFormik({
     initialValues: {
       time: "",
       task: "",
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.time) {
-        errors.time = "Выберите время";
-      }
-      if (!values.task) {
-        errors.task = "Заполните поле";
-      }
-      return errors;
-    },
+    validationSchema: Yup.object({
+      time: Yup.string().required("Выберите время"),
+      task: Yup.string().required("Заполните поле"),
+    }),  
     onSubmit: (values) => {
       const newChore = {
         time: formik.values.time,
         task: formik.values.task,
         id: Date.now(),
       };
-      create(newChore);
+      Chore.addChore(newChore);
       values.time = "";
       values.task = "";
     },
@@ -42,7 +38,7 @@ const AddChore = ({ create }) => {
         // onChange={formik.handleChange}
         // onBlur={formik.handleBlur}
         // value={formik.values.time}
-        {...formik.getFieldProps('time')}
+        {...formik.getFieldProps("time")}
       />
       {formik.touched.time && formik.errors.time ? (
         <span className={classes.error}>{formik.errors.time}</span>
@@ -54,7 +50,7 @@ const AddChore = ({ create }) => {
         // onChange={formik.handleChange}
         // onBlur={formik.handleBlur}
         // value={formik.values.task}
-        {...formik.getFieldProps('task')}
+        {...formik.getFieldProps("task")}
       />
       {formik.touched.task && formik.errors.task ? (
         <span className={classes.error}>{formik.errors.task}</span>
@@ -63,6 +59,6 @@ const AddChore = ({ create }) => {
       <AddButton type="submit" />
     </form>
   );
-};
+});
 
 export default AddChore;

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Input from "../Input/Input";
 import classes from "./ChoreItem.module.css";
 import { useFormik } from "formik";
+import Chore from "../../Chore";
+import { observer } from "mobx-react-lite";
+import * as Yup from "yup";
 
-const ChoreItem = ({ chore, remove, edit }) => {
+const ChoreItem = observer(({ chore }) => {
   const [isInEditMode, setIsInEditMode] = useState(false);
   let time = chore.time;
   let task = chore.task;
@@ -12,42 +15,27 @@ const ChoreItem = ({ chore, remove, edit }) => {
       time: `${time}`,
       task: `${task}`,
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.time) {
-        errors.time = "Выберите время";
+    validationSchema: Yup.object({
+      time: Yup.string().required("Выберите время"),
+      task: Yup.string().required("Заполните поле"),
+    }),
+    onSubmit: (values) => {
+      if (isInEditMode) {
+        const editChore = {
+          id: chore.id,
+          time: formik.values.time,
+          task: formik.values.task,
+        };
+        Chore.editChore(editChore);
+        setIsInEditMode(false);
+      } else {
+        setIsInEditMode(true);
       }
-      if (!values.task) {
-        errors.task = "Заполните поле";
-      }
-      return errors;
     },
-    // onSubmit: (values) => {
-    //   const editChore = {
-    //     time: formik.values.time,
-    //     task: formik.values.task,
-    //     id: chore.id,
-    //   };
-    //   edit(editChore);
-    //   console.log('123');
-    //   // time = formik.values.time;
-    //   // task = formik.values.task;
-    // },
   });
 
-  const submitEdit = () => {
-    const editChore = {
-      time: formik.values.time,
-      task: formik.values.task,
-      id: chore.id,
-    };
-    edit(editChore);
-    setIsInEditMode(false)
-  }
-
-
   return (
-    <div className={classes.item}>
+    <form onSubmit={formik.handleSubmit} className={classes.item}>
       <div className={classes.container}>
         {isInEditMode ? (
           <div className={classes.content}>
@@ -88,18 +76,16 @@ const ChoreItem = ({ chore, remove, edit }) => {
 
         <div className={classes.actions}>
           {isInEditMode ? (
-            <a onClick={submitEdit}>
-              Подтвердить
-            </a>
+            <button type="submit">Подтвердить</button>
           ) : (
-            <a onClick={() => setIsInEditMode(true)}>Редактировать</a>
+            <button type="submit">Редактировать</button>
           )}
-          <a>Выполнено</a>
-          <a onClick={() => remove(chore)}>Удалить</a>
+          <button>Выполнено</button>
+          <button onClick={() => Chore.removeChore(chore.id)}>Удалить</button>
         </div>
       </div>
-    </div>
+    </form>
   );
-};
+});
 
 export default ChoreItem;

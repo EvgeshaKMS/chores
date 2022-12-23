@@ -76,7 +76,7 @@
     align-items: end;
 }
 
-.actions>a {
+.actions>button {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 600;
@@ -88,11 +88,13 @@
     text-decoration: underline;
     text-decoration-color: #DBE7FF;
     text-underline-offset: 3px;
+    border: none;
 
     color: #173343;
+    background-color: #fff;
 }
 
-.actions>a:hover {
+.actions>button:hover {
     cursor: pointer;
 }
 
